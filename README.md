@@ -14,6 +14,16 @@ $ egg-init egg-example --type=simple
 $ cd egg-example
 $ npm i
 
+此时目录结构如下：
+
+egg-example
+├── app
+│   ├── controller
+│   │   └── home.js
+│   └── router.js
+├── config
+│   └── config.default.js
+└── package.json
 
 启动项目:
 
