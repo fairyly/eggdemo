@@ -154,3 +154,141 @@ module.exports = app => {
 ```
 
 - 启动浏览器，访问 http://localhost:7001/news 即可看到渲染后的页面
+
+
+=================================================================
+
+## 编写 service
+
+在实际应用中，Controller 一般不会自己产出数据，也不会包含复杂的逻辑，复杂的过程应抽象为业务逻辑层 Service。
+
+我们来添加一个 Service 抓取 Hacker News 的数据 ，如下：
+
+```
+// app/service/news.js
+const Service = require('egg').Service;
+
+class NewsService extends Service {
+  async list(page = 1) {
+    // read config
+    const { serverUrl, pageSize } = this.config.news;
+
+    // use build-in http client to GET hacker-news api
+    const { data: idList } = await this.ctx.curl(`${serverUrl}/topstories.json`, {
+      data: {
+        orderBy: '"$key"',
+        startAt: `"${pageSize * (page - 1)}"`,
+        endAt: `"${pageSize * page - 1}"`,
+      },
+      dataType: 'json',
+    });
+
+    // parallel GET detail
+    const newsList = await Promise.all(
+      Object.keys(idList).map(key => {
+        const url = `${serverUrl}/item/${idList[key]}.json`;
+        return this.ctx.curl(url, { dataType: 'json' });
+      })
+    );
+    return newsList.map(res => res.data);
+  }
+}
+
+module.exports = NewsService;
+```
+
+框架提供了内置的 HttpClient 来方便开发者使用 HTTP 请求。
+
+- 然后稍微修改下之前的 Controller：
+
+```
+// app/controller/news.js
+const Controller = require('egg').Controller;
+
+class NewsController extends Controller {
+  async list() {
+    const ctx = this.ctx;
+    const page = ctx.query.page || 1;
+    const newsList = await ctx.service.news.list(page);
+    await ctx.render('news/list.tpl', { list: newsList });
+  }
+}
+
+module.exports = NewsController;
+```
+
+- 还需增加 app/service/news.js 中读取到的配置：
+
+```
+// config/config.default.js
+// 添加 news 的配置项
+exports.news = {
+  pageSize: 5,
+  serverUrl: 'https://hacker-news.firebaseio.com/v0',
+};
+
+```
+>因为请求超时问题，访问 http://127.0.0.1:7001/news 会出现
+ConnectionTimeoutError in /news
+Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: 
+
+##  编写扩展
+
+遇到一个小问题，我们的资讯时间的数据是 UnixTime 格式的，我们希望显示为便于阅读的格式。
+
+框架提供了一种快速扩展的方式，只需在 app/extend 目录下提供扩展脚本即可，具体参见扩展。
+
+在这里，我们可以使用 View 插件支持的 Helper 来实现：
+
+```
+$ npm i moment --save
+// app/extend/helper.js
+const moment = require('moment');
+exports.relativeTime = time => moment(new Date(time * 1000)).fromNow();
+在模板里面使用：
+
+<!-- app/view/news/list.tpl -->
+{{ helper.relativeTime(item.time) }}
+```
+
+## 编写 Middleware
+
+假设有个需求：我们的新闻站点，禁止百度爬虫访问。
+
+聪明的同学们一定很快能想到可以通过 Middleware 判断 User-Agent，如下：
+
+```
+// app/middleware/robot.js
+// options === app.config.robot
+module.exports = (options, app) => {
+  return async function robotMiddleware(ctx, next) {
+    const source = ctx.get('user-agent') || '';
+    const match = options.ua.some(ua => ua.test(source));
+    if (match) {
+      ctx.status = 403;
+      ctx.message = 'Go away, robot.';
+    } else {
+      await next();
+    }
+  }
+};
+
+// config/config.default.js
+// add middleware robot
+exports.middleware = [
+  'robot'
+];
+// robot's configurations
+exports.robot = {
+  ua: [
+    /Baiduspider/i,
+  ]
+};
+```
+
+
+
+
+### 参考资料
+
+- http://eggjs.org/zh-cn/intro/quickstart.html
