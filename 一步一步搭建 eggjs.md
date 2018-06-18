@@ -327,7 +327,65 @@ Service 需要通过 Class 的方式定义，父类必须是 egg.Service。
 Service 不是单例，是 请求级别 的对象，框架在每次请求中首次访问 ctx.service.xx 时延迟实例化，
 
 所以 Service 中可以通过 this.ctx 获取到当前请求的上下文
+
+
+## 使用 Service
+
+下面就通过一个完整的例子，看看怎么使用 Service。
 ```
+// app/router.js
+module.exports = app => {
+  app.router.get('/user/:id', app.controller.user.info);
+};
+
+
+
+// app/controller/user.js
+const Controller = require('egg').Controller;
+class UserController extends Controller {
+  async info() {
+    const userId = ctx.params.id;
+    const userInfo = await ctx.service.user.find(userId);
+    ctx.body = userInfo;
+  }
+}
+module.exports = UserController;
+
+
+
+// app/service/user.js
+const Service = require('egg').Service;
+class UserService extends Service {
+  // 默认不需要提供构造函数。
+  // constructor(ctx) {
+  //   super(ctx); 如果需要在构造函数做一些处理，一定要有这句话，才能保证后面 `this.ctx`的使用。
+  //   // 就可以直接通过 this.ctx 获取 ctx 了
+  //   // 还可以直接通过 this.app 获取 app 了
+  // }
+  async find(uid) {
+    // 假如 我们拿到用户 id 从数据库获取用户详细信息
+    const user = await this.ctx.db.query('select * from user where uid = ?', uid);
+
+    // 假定这里还有一些复杂的计算，然后返回需要的信息。
+    const picture = await this.getPicture(uid);
+
+    return {
+      name: user.user_name,
+      age: user.age,
+      picture,
+    };
+  }
+
+  async getPicture(uid) {
+    const result = await this.ctx.curl(`http://photoserver/uid=${uid}`, { dataType: 'json' });
+    return result.data;
+  }
+}
+module.exports = UserService;
+
+// curl http://127.0.0.1:7001/user/1234
+```
+
 
 ### 参考资料
 
