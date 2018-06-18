@@ -1,0 +1,16 @@
+2018-06-18 10:57:34,002 INFO 22124 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 10:57:34,004 INFO 22124 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 11:57:17,216 INFO 5228 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 11:57:17,217 INFO 5228 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 12:05:01,176 INFO 20492 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 12:05:01,177 INFO 20492 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 12:10:31,769 INFO 7780 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 12:10:31,771 INFO 7780 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 12:52:35,760 INFO 10288 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 12:52:35,764 INFO 10288 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 13:24:23,457 INFO 5804 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 13:24:23,458 INFO 5804 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 15:15:09,219 INFO 13060 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 15:15:09,220 INFO 13060 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000
+2018-06-18 15:29:47,900 INFO 17000 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute at 2018-06-19 00:00:00.000
+2018-06-18 15:29:47,903 INFO 17000 [Timer] J:\node\egg\egg-init\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute at 2018-06-19 00:00:01.000

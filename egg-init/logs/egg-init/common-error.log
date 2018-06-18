@@ -1,0 +1,248 @@
+2018-06-18 12:04:12,266 ERROR 3060 [-/127.0.0.1/-/5029ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5016, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 3060
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 12:05:13,942 ERROR 19324 [-/127.0.0.1/-/5028ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5018, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 19324
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 12:10:42,938 ERROR 13636 [-/127.0.0.1/-/5030ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5019, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 13636
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 12:11:28,276 ERROR 13636 [-/127.0.0.1/-/5005ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":2,"createSocketErrorCount":0,"closeSocketCount":2,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 2
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5003, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 13636
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 12:52:59,945 ERROR 2500 [-/127.0.0.1/-/5188ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5156, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 2500
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 13:11:00,937 ERROR 2500 [-/127.0.0.1/-/5082ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":2,"createSocketErrorCount":0,"closeSocketCount":2,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 2
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5077, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 2500
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 13:16:09,941 ERROR 10288 nodejs.ClusterClientNoResponseError: client no response in 268249ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (J:\node\egg\egg-init\node_modules\cluster-client\lib\leader.js:74:23)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ClusterClientNoResponseError'
+pid: 10288
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 13:17:47,234 ERROR 16688 [-/127.0.0.1/-/5083ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5064, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 16688
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 13:23:50,603 ERROR 8520 nodejs.ServerNoResponseError: server 127.0.0.1:57759 no response in 20001ms, maybe the socket is end on the other side. (address: 127.0.0.1:57759)
+    at Timeout._heartbeatTimer.setInterval [as _onTimeout] (J:\node\egg\egg-init\node_modules\tcp-base\lib\base.js:427:21)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ServerNoResponseError'
+pid: 8520
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 13:28:23,382 ERROR 16488 [-/127.0.0.1/-/5228ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5211, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 16488
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 14:42:28,036 ERROR 7612 [-/127.0.0.1/-/5254ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5141, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 7612
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 15:15:14,453 ERROR 6388 [-/127.0.0.1/-/15ms GET /login] nodejs.Error: Please set config.keys first
+    at Application.get keys [as keys] (J:\node\egg\egg-init\node_modules\egg\lib\application.js:318:15)
+    at Object.get cookies [as cookies] (J:\node\egg\egg-init\node_modules\egg\app\extend\context.js:22:66)
+    at Object.get [egg-security#CSRF_SECRET] (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:78:33)
+    at Object.ensureCsrfSecret (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:89:13)
+    at csrf (J:\node\egg\egg-init\node_modules\egg-security\lib\middlewares\csrf.js:14:9)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at J:\node\egg\egg-init\node_modules\koa-compose\index.js:34:12
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at session (J:\node\egg\egg-init\node_modules\koa-session\index.js:41:13)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+
+pid: 6388
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 15:24:00,318 ERROR 6388 [-/127.0.0.1/-/11ms GET /news] nodejs.Error: Please set config.keys first
+    at Application.get keys [as keys] (J:\node\egg\egg-init\node_modules\egg\lib\application.js:318:15)
+    at Object.get cookies [as cookies] (J:\node\egg\egg-init\node_modules\egg\app\extend\context.js:22:66)
+    at Object.get [egg-security#CSRF_SECRET] (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:78:33)
+    at Object.ensureCsrfSecret (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:89:13)
+    at csrf (J:\node\egg\egg-init\node_modules\egg-security\lib\middlewares\csrf.js:14:9)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at J:\node\egg\egg-init\node_modules\koa-compose\index.js:34:12
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at session (J:\node\egg\egg-init\node_modules\koa-session\index.js:41:13)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+
+pid: 6388
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 15:24:02,921 ERROR 6388 [-/127.0.0.1/-/1ms GET /news] nodejs.Error: Please set config.keys first
+    at Application.get keys [as keys] (J:\node\egg\egg-init\node_modules\egg\lib\application.js:318:15)
+    at Object.get cookies [as cookies] (J:\node\egg\egg-init\node_modules\egg\app\extend\context.js:22:66)
+    at Object.get [egg-security#CSRF_SECRET] (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:78:33)
+    at Object.ensureCsrfSecret (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:89:13)
+    at csrf (J:\node\egg\egg-init\node_modules\egg-security\lib\middlewares\csrf.js:14:9)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at J:\node\egg\egg-init\node_modules\koa-compose\index.js:34:12
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at session (J:\node\egg\egg-init\node_modules\koa-session\index.js:41:13)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+
+pid: 6388
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 15:29:18,896 ERROR 6388 [-/127.0.0.1/-/8ms GET /news] nodejs.Error: Please set config.keys first
+    at Application.get keys [as keys] (J:\node\egg\egg-init\node_modules\egg\lib\application.js:318:15)
+    at Object.get cookies [as cookies] (J:\node\egg\egg-init\node_modules\egg\app\extend\context.js:22:66)
+    at Object.get [egg-security#CSRF_SECRET] (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:78:33)
+    at Object.ensureCsrfSecret (J:\node\egg\egg-init\node_modules\egg-security\app\extend\context.js:89:13)
+    at csrf (J:\node\egg\egg-init\node_modules\egg-security\lib\middlewares\csrf.js:14:9)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at J:\node\egg\egg-init\node_modules\koa-compose\index.js:34:12
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+    at session (J:\node\egg\egg-init\node_modules\koa-session\index.js:41:13)
+    at dispatch (J:\node\egg\egg-init\node_modules\koa-compose\index.js:42:32)
+
+pid: 6388
+hostname: LAPTOP-EPL0MCAO
+
+2018-06-18 15:30:08,325 ERROR 14864 [-/127.0.0.1/-/5241ms GET /news] nodejs.ConnectionTimeoutError: Connect timeout for 5000ms, GET https://hacker-news.firebaseio.com/v0/topstories.json -2 (connected: false, keepalive socket: false, agent status: {"createSocketCount":1,"createSocketErrorCount":0,"closeSocketCount":1,"errorSocketCount":0,"timeoutSocketCount":0,"requestCount":0,"freeSockets":{},"sockets":{},"requests":{}})
+headers: {}
+headers: {}
+    at Timeout._onTimeout (J:\node\egg\egg-init\node_modules\urllib\lib\urllib.js:801:15)
+    at ontimeout (timers.js:498:11)
+    at tryOnTimeout (timers.js:323:5)
+    at Timer.listOnTimeout (timers.js:290:5)
+name: 'ConnectionTimeoutError'
+requestId: 1
+data: undefined
+path: '/v0/topstories.json?orderBy=%22%24key%22&startAt=%220%22&endAt=%224%22'
+status: -2
+headers: {}
+res: { status: -2, statusCode: -2, headers: {}, size: 0, aborted: false, rt: 5230, keepAliveSocket: false, data: undefined, requestUrls: [ 'https://hacker-news.firebaseio.com/v0/topstories.json' ], timing: null, remoteAddress: '35.201.97.85', remotePort: '' }
+pid: 14864
+hostname: LAPTOP-EPL0MCAO
+
