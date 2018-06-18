@@ -390,3 +390,4 @@ module.exports = UserService;
 ### 参考资料
 
 - http://eggjs.org/zh-cn/intro/quickstart.html
+- [issue: Please set config.keys first]: https://cnodejs.org/topic/59102863d371b6372a8af6b4
