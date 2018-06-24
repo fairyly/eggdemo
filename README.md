@@ -1,7 +1,7 @@
 # eggdemo
 - website: http://eggjs.org
 - doc: http://eggjs.org/zh-cn/intro/quickstart.html
-
+- 实现 RESTful API DEMO: https://github.com/eggjs/examples/tree/master/cnode-api
 ## egg-plugin
 
 - https://github.com/topics/egg-plugin
