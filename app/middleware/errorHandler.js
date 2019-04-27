@@ -17,6 +17,10 @@ module.exports = () => {
       ctx.body = { error };
       if (status === 422) {
         ctx.body.detail = err.errors;
+        ctx.body.success = false;
+        ctx.body.message = "参数错误";
+        ctx.body.code = 0;
+        ctx.body.data = {}
       }
       ctx.status = status;
     }

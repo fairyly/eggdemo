@@ -6,6 +6,13 @@ class UserController extends Controller {
   // 增加
   async add() {
     const { ctx } = this;
+    const rule = {
+      userName: { type: 'string', required: true, message: '必填项' },
+      userPass: { type: 'string', required: true, message: '必填项' },
+      userEmail: { type: 'email', required: true, message: '必填项' },
+    };
+    const requestParam = ctx.request.body;
+    await ctx.validate(rule, requestParam);
     ctx.body = await ctx.service.user.add();
   }
   // 查询所有
