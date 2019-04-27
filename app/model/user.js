@@ -5,10 +5,23 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    userName: {
+    userId: {
       type: String,
       unique: true,
       required: true,
+    },
+    userName: {
+      type: String,
+      required: true,
+    },
+    userAge: {
+      type: String
+    },
+    userSex: {
+      type: String
+    },
+    userPhote: {
+      type: String
     },
   });
   return mongoose.model('User', UserSchema);
