@@ -4,10 +4,49 @@ const Service = require('egg').Service;
 const uuidv5 = require('uuid/v5');
 
 class UserService extends Service {
+  /**
+   * 生成 Token
+   * @param {Object} data
+   */
+  async createToken(data) {
+    const { ctx } = this;
+    return ctx.app.jwt.sign(data, ctx.app.config.jwt.secret, {
+      expiresIn: "12h"
+    });
+  }
+
+  /**
+   * 验证token的合法性
+   * @param {String} token
+   */
+  async verifyToken(token) {
+    const { ctx } = this;
+    return new Promise((resolve, reject) => {
+      ctx.app.jwt.verify(token, ctx.app.config.jwt.secret, function(err, decoded) {
+        let result = {};
+        if (err) {
+          /*
+            err = {
+              name: 'TokenExpiredError',
+              message: 'jwt expired',
+              expiredAt: 1408621000
+            }
+          */
+          result.verify = false;
+          result.message = err.message;
+        } else {
+          result.verify = true;
+          result.message = decoded;
+        }
+        resolve(result);
+      });
+    });
+  }
+
   // 添加用户信息
   async add() {
     const { ctx } = this;
-    console.log(String(uuidv5((new Date().getTime())+'123.com', uuidv5.DNS)).replace(/-/g,''))
+    let token = await ctx.service.user.createToken({ id: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,'') })
     const result = await ctx.model.User.create({
       userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
       userName: new Date().getTime(),
@@ -16,7 +55,9 @@ class UserService extends Service {
         success: true,
         message: "添加成功",
         code: 1,
-        data: res
+        data: res,
+        // 生成 token
+        token: token
       };
     }).catch(err =>{
       return {
