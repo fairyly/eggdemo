@@ -14,6 +14,14 @@ module.exports = app => {
       type: String,
       required: true,
     },
+    userPass: {
+      type: String,
+      required: true,
+    },
+    userEmail: {
+      type: String,
+      required: true,
+    },
     userAge: {
       type: String
     },

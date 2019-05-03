@@ -11,7 +11,7 @@ class UserService extends Service {
   async createToken(data) {
     const { ctx } = this;
     return ctx.app.jwt.sign(data, ctx.app.config.jwt.secret, {
-      expiresIn: "12h"
+      expiresIn: "2h"
     });
   }
 
@@ -43,21 +43,105 @@ class UserService extends Service {
     });
   }
 
-  // 添加用户信息
-  async add() {
+  // 登录（先查询是否存在）
+  async login(requestParam) {
     const { ctx } = this;
     let token = await ctx.service.user.createToken({ id: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,'') })
-    const result = await ctx.model.User.create({
+    const result = await ctx.model.User.findOne({ userName: requestParam.userName, userPass: requestParam.userPass }).then(res =>{
+      return {
+        success: true,
+        message: "登录成功",
+        code: 1,
+        // 生成 token
+        token: token
+      };
+    }).catch(err =>{
+      return {
+        success: false,
+        message: "登录失败",
+        code: 0,
+        data: err
+      };
+    })
+    return result;
+  }
+
+  // 注册 (先查询用户名是否存在)
+  async signUp(requestParam) {
+    const { ctx } = this;
+    const resData = await ctx.model.User.findOne({ userName: requestParam.userName });
+    if (!!resData) {
+      return  {
+        success: false,
+        message: "用户已存在",
+        code: 0,
+        data: {}
+      };
+    }
+   
+    let reqData = {
       userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
-      userName: new Date().getTime(),
-    }).then(res =>{
+      userName: requestParam.userName,
+      userEmail: requestParam.userEmail,
+      userPass: requestParam.userPass,
+      userAge: requestParam.userAge || '',
+      userPhote: requestParam.userPhote || '',
+      userSex: requestParam.userSex || '0', //0 :男； 1：女
+    }
+    const result = await ctx.model.User.create(reqData).then(res =>{
+      return {
+        success: true,
+        message: "注册成功",
+        code: 1,
+        data: {}
+      };
+    }).catch(err =>{
+      return {
+        success: false,
+        message: "注册失败",
+        code: 0,
+        data: err
+      };
+    })
+    return result;
+  }
+
+  // 添加用户信息
+  async add(requestParam,token) {
+    const { ctx } = this;
+    let resToken = await ctx.service.user.verifyToken(token);
+    if (!resToken.verify) {
+      return {
+        success: false,
+        message: "token 已过期",
+        code: 0,
+        data: {}
+      }
+    }
+    const resData = await ctx.model.User.findOne({ userName: requestParam.userName });
+    if (!!resData) {
+      return  {
+        success: false,
+        message: "用户已存在",
+        code: 0,
+        data: {}
+      };
+    }
+    let reqData = {
+      userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
+      userName: requestParam.userName,
+      userEmail: requestParam.userEmail,
+      userPass: requestParam.userPass,
+      userAge: requestParam.userAge || '',
+      userPhote: requestParam.userPhote || '',
+      userSex: requestParam.userSex || '0', //0 :男； 1：女
+    }
+    const result = await ctx.model.User.create(reqData).then(res =>{
       return {
         success: true,
         message: "添加成功",
         code: 1,
-        data: res,
-        // 生成 token
-        token: token
+        data: res
       };
     }).catch(err =>{
       return {
@@ -71,8 +155,18 @@ class UserService extends Service {
   }
 
   // 查询所有信息
-  async findAll() {
-    let result = await this.ctx.model.User.find()
+  async findAll(token) {
+    const { ctx } = this;
+    let resToken = await ctx.service.user.verifyToken(token);
+    if (!resToken.verify) {
+      return {
+        success: false,
+        message: "token 已过期",
+        code: 0,
+        data: {}
+      }
+    }
+    let result = await ctx.model.User.find()
     .then(res =>{
       return {
         success: true,
@@ -92,8 +186,18 @@ class UserService extends Service {
   }
 
   // 查询单个信息
-  async findUser() {
-    const result = await this.ctx.model.User.findOne({'userName': 'test'})
+  async findUser(requestParam, token) {
+    const { ctx } = this;
+    let resToken = await ctx.service.user.verifyToken(token);
+    if (!resToken.verify) {
+      return {
+        success: false,
+        message: "token 已过期",
+        code: 0,
+        data: {}
+      }
+    }
+    const result = await ctx.model.User.findOne({'userId': requestParam.userId})
     .then(res =>{
       return {
         success: true,
@@ -113,9 +217,19 @@ class UserService extends Service {
   }
 
   // 删除一个信息
-  async deleteUser(){
-    const result = await this.ctx.model.User.deleteOne({
-        "userName":"1556352664529"
+  async deleteUser(requestParam, token){
+    const { ctx } = this;
+    let resToken = await ctx.service.user.verifyToken(token);
+    if (!resToken.verify) {
+      return {
+        success: false,
+        message: "token 已过期",
+        code: 0,
+        data: {}
+      }
+    }
+    const result = await ctx.model.User.deleteOne({
+        "userId": requestParam.userId
     }).then(res =>{
       return {
         success: true,
@@ -135,10 +249,28 @@ class UserService extends Service {
   }
 
   // 更新
-  async updateUser() {
-    const result = await this.ctx.model.User.updateOne({
-        "userId":"aa21745962a3-5c76-8003-26ec20611512"
-    },{"userName": "test"}).then(res =>{
+  async updateUser(requestParam, token) {
+    const { ctx } = this;
+    let resToken = await ctx.service.user.verifyToken(token);
+    if (!resToken.verify) {
+      return {
+        success: false,
+        message: "token 已过期",
+        code: 0,
+        data: {}
+      }
+    }
+    const result = await ctx.model.User.updateOne({
+        "userId": requestParam.userId
+    },{
+      userName: requestParam.userName,
+      userEmail: requestParam.userEmail,
+      userPass: requestParam.userPass,
+      userAge: requestParam.userAge || '',
+      userPhote: requestParam.userPhote || '',
+      userSex: requestParam.userSex || '0', //0 :男； 1：女
+    })
+    .then(res =>{
       return {
         success: true,
         message: "更新成功",

@@ -25,6 +25,17 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+  config.cors = {
+    enable: true,
+    package: 'egg-cors',
+  },
+
   // 跨域
   config.cors = {
     origin: '*', // 访问白名单,根据你自己的需要进行设置

@@ -4,6 +4,31 @@ const Controller = require('egg').Controller;
 
 class UserController extends Controller {
 
+  // 注册
+  async signUp() {
+    const { ctx } = this;
+    const rule = {
+      userName: { type: 'string', required: false, message: '必填项' },
+      userPass: { type: 'string', required: false, message: '必填项' },
+      userEmail: { type: 'email', required: false, message: '必填项' },
+    };
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    await ctx.validate(rule, requestParam);
+    ctx.body = await ctx.service.user.signUp(requestParam);
+  }
+
+  // 登录
+  async login() {
+    const { ctx } = this;
+    const rule = {
+      userName: { type: 'string', required: false, message: '必填项' },
+      userPass: { type: 'string', required: false, message: '必填项' }
+    };
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    await ctx.validate(rule, requestParam);
+    ctx.body = await ctx.service.user.login(requestParam);
+  }
+
   // 增加
   async add() {
     const { ctx } = this;
@@ -12,33 +37,47 @@ class UserController extends Controller {
       userPass: { type: 'string', required: false, message: '必填项' },
       userEmail: { type: 'email', required: false, message: '必填项' },
     };
-    const requestParam = ctx.request.body;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
     await ctx.validate(rule, requestParam);
-    ctx.body = await ctx.service.user.add();
+    let token = ctx.header.token;
+    ctx.body = await ctx.service.user.add(requestParam, token);
   }
   // 查询所有
   async findAll() {
     const { ctx } = this;
-    let res = await ctx.service.user.findAll();
+    let token = ctx.header.token;
+    let res = await ctx.service.user.findAll(token);
     ctx.body = res;
   }
   // 查询单个
   async findUser() {
     const { ctx } = this;
-    let res = await ctx.service.user.findUser();
+    let token = ctx.header.token;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    let res = await ctx.service.user.findUser(requestParam, token);
     ctx.body = res;
   }
   // 删除单个
   async deleteUser() {
     const { ctx } = this;
-    let res = await ctx.service.user.deleteUser();
+    let token = ctx.header.token;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    let res = await ctx.service.user.deleteUser(requestParam, token);
     ctx.body = res;
   }
 
   // 更新数据
   async updateUser() {
     const { ctx } = this;
-    let res = await ctx.service.user.updateUser();
+    let token = ctx.header.token;
+    const rule = {
+      userName: { type: 'string', required: false, message: '必填项' },
+      userPass: { type: 'string', required: false, message: '必填项' },
+      userEmail: { type: 'email', required: false, message: '必填项' },
+    };
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    await ctx.validate(rule, requestParam);
+    let res = await ctx.service.user.updateUser(requestParam, token);
     ctx.body = res;
   }
 }
