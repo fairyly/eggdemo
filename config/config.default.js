@@ -44,7 +44,7 @@ module.exports = appInfo => {
   
   // 数据库
   config.mongoose = {
-    url: 'mongodb://127.0.0.1/apiEgg',
+    url: 'mongodb://myblog:myblog@ds139327.mlab.com:39327/apiEgg',
     options: {},
   };
 

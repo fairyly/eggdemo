@@ -22,4 +22,6 @@ module.exports = app => {
   router.post('/user/updateUser', controller.user.updateUser);
   router.post('/user/signUp', controller.user.signUp);
   router.post('/user/login', controller.user.login);
+
+  router.post('/upload', controller.upload.index);
 };
