@@ -2,7 +2,7 @@
   "name": "api-egg",
   "version": "1.0.0",
   "description": "egg api server",
-  "private": true,
+  "private": false,
   "egg": {
     "declarations": true
   },
