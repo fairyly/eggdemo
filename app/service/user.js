@@ -47,18 +47,28 @@ class UserService extends Service {
   async login(requestParam) {
     const { ctx } = this;
     let token = await ctx.service.user.createToken({ id: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,'') })
-    const result = await ctx.model.User.findOne({ userName: requestParam.userName, userPass: requestParam.userPass }).then(res =>{
-      return {
-        success: true,
-        message: "登录成功",
-        code: 1,
-        // 生成 token
-        token: token
-      };
+    const result = await ctx.model.User.findOne({ userName: requestParam.userName }).then(res =>{
+      if (res.userPass == requestParam.userPass) {
+        return {
+          success: true,
+          message: "登录成功",
+          code: 1,
+          // 生成 token
+          token: token
+        };
+      }else {
+        return {
+          success: true,
+          message: "用户名或密码错误",
+          code: 1,
+          // 生成 token
+          token: token
+        };
+      }
     }).catch(err =>{
       return {
         success: false,
-        message: "登录失败",
+        message: "用户名或密码错误",
         code: 0,
         data: err
       };

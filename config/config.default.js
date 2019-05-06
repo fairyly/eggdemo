@@ -29,6 +29,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+    domainWhiteList: ['*']
   };
 
   config.cors = {
@@ -38,13 +39,13 @@ module.exports = appInfo => {
 
   // 跨域
   config.cors = {
-    origin: '*', // 访问白名单,根据你自己的需要进行设置
+    origin: 'http://127.0.0.1:3000', // 访问白名单,根据你自己的需要进行设置
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
   
   // 数据库
   config.mongoose = {
-    url: 'mongodb://myblog:myblog@ds139327.mlab.com:39327/apiEgg',
+    url: 'mongodb://127.0.0.1/apiEgg',//'mongodb://myblog:myblog@ds139327.mlab.com:39327/apiEgg',
     options: {},
   };
 
