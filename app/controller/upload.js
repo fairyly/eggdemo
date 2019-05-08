@@ -40,7 +40,7 @@ class UploadController extends Controller {
     }
     //文件响应
     ctx.body = {
-      url: '/public/uploads/' + filename
+      url: 'http://127.0.0.1:7001/public/uploads/' + filename
     };
   }
 }
