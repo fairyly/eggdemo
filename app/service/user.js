@@ -95,7 +95,7 @@ class UserService extends Service {
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
-      userPhote: requestParam.userPhote || '',
+      userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
     }
     const result = await ctx.model.User.create(reqData).then(res =>{
@@ -143,7 +143,7 @@ class UserService extends Service {
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
-      userPhote: requestParam.userPhote || '',
+      userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
     }
     const result = await ctx.model.User.create(reqData).then(res =>{
@@ -277,7 +277,7 @@ class UserService extends Service {
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
-      userPhote: requestParam.userPhote || '',
+      userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
     })
     .then(res =>{
