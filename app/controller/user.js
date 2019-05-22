@@ -45,8 +45,9 @@ class UserController extends Controller {
   // 查询所有
   async findAll() {
     const { ctx } = this;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
     let token = ctx.header.token;
-    let res = await ctx.service.user.findAll(token);
+    let res = await ctx.service.user.findAll(requestParam, token);
     ctx.body = res;
   }
   // 查询单个

@@ -143,8 +143,10 @@ class UserService extends Service {
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
-      userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
+      userPhoto: requestParam.userPhoto || '',
+      userAddress: requestParam.userAddress || '',
+      hiredate: requestParam.hiredate || ''
     }
     const result = await ctx.model.User.create(reqData).then(res =>{
       return {
@@ -165,7 +167,7 @@ class UserService extends Service {
   }
 
   // 查询所有信息
-  async findAll(token) {
+  async findAll(requestParam, token) {
     const { ctx } = this;
     let resToken = await ctx.service.user.verifyToken(token);
     if (!resToken.verify) {
@@ -176,13 +178,18 @@ class UserService extends Service {
         data: {}
       }
     }
-    let result = await ctx.model.User.find()
+    let total = await ctx.model.User.find();
+    let currentPage = requestParam.currentPage;
+    let pageSize = requestParam.pageSize;
+    const querySkip = (currentPage - 1) * Number(pageSize);
+    let result = await ctx.model.User.find().limit(pageSize || 10).skip(querySkip)
     .then(res =>{
       return {
         success: true,
         message: "查询成功",
         code: 1,
-        data: res
+        data: res,
+        totalNum: total.length
       };
     }).catch(err =>{
       return {
@@ -273,12 +280,14 @@ class UserService extends Service {
     const result = await ctx.model.User.updateOne({
         "userId": requestParam.userId
     },{
-      userName: requestParam.userName,
+     userName: requestParam.userName,
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
-      userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
+      userPhoto: requestParam.userPhoto || '',
+      userAddress: requestParam.userAddress || '',
+      hiredate: requestParam.hiredate || ''
     })
     .then(res =>{
       return {

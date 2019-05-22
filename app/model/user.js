@@ -28,9 +28,15 @@ module.exports = app => {
     userSex: {
       type: String
     },
-    userPhote: {
+    userPhoto: {
       type: String
     },
+    userAddress: {
+      type: String
+    },
+    hiredate: {
+      type: String
+    }
   });
   return mongoose.model('User', UserSchema);
 };
