@@ -5,36 +5,45 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    userId: {
+    userId: {           // 用户 id
       type: String,
       unique: true,
       required: true,
     },
-    userName: {
+    userName: {         // 用户名字
       type: String,
       required: true,
     },
-    userPass: {
+    userPass: {         // 用户密码
       type: String,
       required: true,
     },
-    userEmail: {
+    userEmail: {        // 用户邮箱
       type: String,
       required: true,
     },
-    userAge: {
+    userAge: {          // 用户年龄
       type: String
     },
-    userSex: {
+    userSex: {          // 用户性别
       type: String
     },
-    userPhoto: {
+    userPhoto: {        // 用户头像
       type: String
     },
-    userAddress: {
+    userAddress: {      // 用户地址
       type: String
     },
-    hiredate: {
+    hiredate: {         // 入职时间
+      type: String
+    },
+    job: {              // 职位
+      type: String
+    },
+    createDate: {         // 创建时间
+      type: String
+    },
+    updateDate: {         // 更新时间
       type: String
     }
   });

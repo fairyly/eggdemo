@@ -4,50 +4,12 @@ const Service = require('egg').Service;
 const uuidv5 = require('uuid/v5');
 
 class UserService extends Service {
-  /**
-   * 生成 Token
-   * @param {Object} data
-   */
-  async createToken(data) {
-    const { ctx } = this;
-    return ctx.app.jwt.sign(data, ctx.app.config.jwt.secret, {
-      expiresIn: "2h"
-    });
-  }
-
-  /**
-   * 验证token的合法性
-   * @param {String} token
-   */
-  async verifyToken(token) {
-    const { ctx } = this;
-    return new Promise((resolve, reject) => {
-      ctx.app.jwt.verify(token, ctx.app.config.jwt.secret, function(err, decoded) {
-        let result = {};
-        if (err) {
-          /*
-            err = {
-              name: 'TokenExpiredError',
-              message: 'jwt expired',
-              expiredAt: 1408621000
-            }
-          */
-          result.verify = false;
-          result.message = err.message;
-        } else {
-          result.verify = true;
-          result.message = decoded;
-        }
-        resolve(result);
-      });
-    });
-  }
-
   // 登录（先查询是否存在）
   async login(requestParam) {
     const { ctx } = this;
-    let token = await ctx.service.user.createToken({ id: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,'') })
+    let token = await ctx.helper.createToken(ctx, { id: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,'') })
     const result = await ctx.model.User.findOne({ userName: requestParam.userName }).then(res =>{
+
       if (res.userPass == requestParam.userPass) {
         return {
           success: true,
@@ -97,6 +59,11 @@ class UserService extends Service {
       userAge: requestParam.userAge || '',
       userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
+      userAddress: requestParam.userAddress || '',
+      hiredate: requestParam.hiredate || '',
+      job: requestParam.job || '',
+      createDate: await ctx.helper.formatDate(new Date()),
+      updateDate: await ctx.helper.formatDate(new Date())
     }
     const result = await ctx.model.User.create(reqData).then(res =>{
       return {
@@ -119,7 +86,7 @@ class UserService extends Service {
   // 添加用户信息
   async add(requestParam,token) {
     const { ctx } = this;
-    let resToken = await ctx.service.user.verifyToken(token);
+    let resToken = await ctx.helper.verifyToken(ctx, token);
     if (!resToken.verify) {
       return {
         success: false,
@@ -146,7 +113,10 @@ class UserService extends Service {
       userSex: requestParam.userSex || '0', //0 :男； 1：女
       userPhoto: requestParam.userPhoto || '',
       userAddress: requestParam.userAddress || '',
-      hiredate: requestParam.hiredate || ''
+      hiredate: requestParam.hiredate || '',
+      job: requestParam.job || '',
+      createDate: await ctx.helper.formatDate(new Date()),
+      updateDate: await ctx.helper.formatDate(new Date())
     }
     const result = await ctx.model.User.create(reqData).then(res =>{
       return {
@@ -169,7 +139,7 @@ class UserService extends Service {
   // 查询所有信息
   async findAll(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.service.user.verifyToken(token);
+    let resToken = await ctx.helper.verifyToken(ctx, token);
     if (!resToken.verify) {
       return {
         success: false,
@@ -184,6 +154,9 @@ class UserService extends Service {
     const querySkip = (currentPage - 1) * Number(pageSize);
     let result = await ctx.model.User.find().limit(pageSize || 10).skip(querySkip)
     .then(res =>{
+      res.forEach( async (ele) => {
+        ele.userPass = '';
+      })
       return {
         success: true,
         message: "查询成功",
@@ -205,7 +178,7 @@ class UserService extends Service {
   // 查询单个信息
   async findUser(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.service.user.verifyToken(token);
+    let resToken = await ctx.helper.verifyToken(ctx, token);
     if (!resToken.verify) {
       return {
         success: false,
@@ -216,6 +189,7 @@ class UserService extends Service {
     }
     const result = await ctx.model.User.findOne({'userId': requestParam.userId})
     .then(res =>{
+      res.userPass = '';
       return {
         success: true,
         message: "查询成功",
@@ -236,7 +210,7 @@ class UserService extends Service {
   // 删除一个信息
   async deleteUser(requestParam, token){
     const { ctx } = this;
-    let resToken = await ctx.service.user.verifyToken(token);
+    let resToken = await ctx.helper.verifyToken(ctx, token);
     if (!resToken.verify) {
       return {
         success: false,
@@ -268,7 +242,7 @@ class UserService extends Service {
   // 更新
   async updateUser(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.service.user.verifyToken(token);
+    let resToken = await ctx.helper.verifyToken(ctx, token);
     if (!resToken.verify) {
       return {
         success: false,
@@ -287,7 +261,9 @@ class UserService extends Service {
       userSex: requestParam.userSex || '0', //0 :男； 1：女
       userPhoto: requestParam.userPhoto || '',
       userAddress: requestParam.userAddress || '',
-      hiredate: requestParam.hiredate || ''
+      hiredate: requestParam.hiredate || '',
+      job: requestParam.job || '',
+      updateDate: await ctx.helper.formatDate(new Date())
     })
     .then(res =>{
       return {

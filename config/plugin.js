@@ -28,3 +28,8 @@
     package: "egg-jwt"
   };
 
+  exports.bcrypt = {
+    enable: true,
+    package: 'egg-bcrypt'
+  };
+
