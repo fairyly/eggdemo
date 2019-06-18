@@ -60,6 +60,7 @@ class UserService extends Service {
       userPhoto: requestParam.userPhoto || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
       userAddress: requestParam.userAddress || '',
+      userRole: '3', // 1: 管理员，2： 人事，3： 员工 
       hiredate: requestParam.hiredate || '',
       job: requestParam.job || '',
       createDate: await ctx.helper.formatDate(new Date()),
@@ -113,6 +114,7 @@ class UserService extends Service {
       userSex: requestParam.userSex || '0', //0 :男； 1：女
       userPhoto: requestParam.userPhoto || '',
       userAddress: requestParam.userAddress || '',
+      userRole: '3', // 1: 管理员，2： 人事，3： 员工 
       hiredate: requestParam.hiredate || '',
       job: requestParam.job || '',
       createDate: await ctx.helper.formatDate(new Date()),
@@ -254,13 +256,14 @@ class UserService extends Service {
     const result = await ctx.model.User.updateOne({
         "userId": requestParam.userId
     },{
-     userName: requestParam.userName,
+      userName: requestParam.userName,
       userEmail: requestParam.userEmail,
       userPass: requestParam.userPass,
       userAge: requestParam.userAge || '',
       userSex: requestParam.userSex || '0', //0 :男； 1：女
       userPhoto: requestParam.userPhoto || '',
       userAddress: requestParam.userAddress || '',
+      userRole: requestParam.userRole || '3', // 1: 管理员，2： 人事，3： 员工 
       hiredate: requestParam.hiredate || '',
       job: requestParam.job || '',
       updateDate: await ctx.helper.formatDate(new Date())

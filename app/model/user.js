@@ -34,6 +34,9 @@ module.exports = app => {
     userAddress: {      // 用户地址
       type: String
     },
+    userRole: {      // 用户角色
+      type: String
+    },
     hiredate: {         // 入职时间
       type: String
     },
