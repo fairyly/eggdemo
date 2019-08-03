@@ -45,7 +45,7 @@ module.exports = appInfo => {
   
   // 数据库
   config.mongoose = {
-    url: 'mongodb://127.0.0.1/apiEgg',//'mongodb://myblog:myblog@ds139327.mlab.com:39327/apiEgg',
+    url: 'mongodb://appAdmin:Lwb123456@127.0.0.1/apiEgg',//'mongodb://myblog:myblog@ds139327.mlab.com:39327/apiEgg',
     options: {},
   };
 
@@ -56,6 +56,13 @@ module.exports = appInfo => {
   config.bcrypt = {
     saltRounds: 10 // default 10
   };
+
+  exports.alinode = {
+  server: 'wss://agentserver.node.aliyun.com:8080',
+  appid: '81043',
+  secret: '91cf2f2c8d4be8c6d601b2f2d8090f2bcacfae92',
+  
+};
 
   return {
     ...config,

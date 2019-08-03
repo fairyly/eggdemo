@@ -33,3 +33,8 @@
     package: 'egg-bcrypt'
   };
 
+  exports.alinode = {
+    enable: true,
+    package: 'egg-alinode'
+  };
+
