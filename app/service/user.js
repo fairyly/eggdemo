@@ -290,12 +290,14 @@ class UserService extends Service {
     const { ctx } = this;
     let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx9a31344272cb44c9&secret=d2db5e4678016f4da636ad240f9444b9&js_code=${requestParam.code}&grant_type=authorization_code`);
     console.log(authData);
-    return  {
+    authData.then(res =>{
+      return  {
         success: true,
         message: "",
         code: 0,
-        data: authData
+        data: res
       };
+    })
   }
 
   // 检查用户信息
