@@ -83,13 +83,13 @@ class UserService extends Service {
       userId: requestParam.openid,
       openid: requestParam.openid,
       nickName: requestParam.nickName,
-      point: resData.point + 5,
+      point: requestParam.point + 5,
       createDate: await ctx.helper.formatDate(new Date())
     }
     await ctx.model.User.updateOne({
         "openid": requestParam.openid
     },{
-      point: requestParam.point,
+      point: requestParam.point+5,
       updateDate: await ctx.helper.formatDate(new Date())
     })
     
