@@ -16,7 +16,7 @@ class UserService extends Service {
         success: true,
         message: "查询成功",
         code: 1,
-        data: res
+        data: new Buffer(res.data).toString()
       };
     }).catch(err =>{
       return {
