@@ -12,15 +12,12 @@ module.exports = app => {
     },
     userName: {         // 用户名字
       type: String,
-      required: true,
     },
     userPass: {         // 用户密码
       type: String,
-      required: true,
     },
     userEmail: {        // 用户邮箱
       type: String,
-      required: true,
     },
     userAge: {          // 用户年龄
       type: String
