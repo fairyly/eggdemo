@@ -336,6 +336,7 @@ class UserService extends Service {
       createDate: await ctx.helper.formatDate(new Date()),
       updateDate: await ctx.helper.formatDate(new Date())
     }
+    
     const result = await ctx.model.User.create(reqData).then(res =>{
       return {
         success: true,
