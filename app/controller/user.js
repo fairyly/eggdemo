@@ -81,7 +81,17 @@ class UserController extends Controller {
     let res = await ctx.service.user.updateUser(requestParam, token);
     ctx.body = res;
   }
-  // 更新数据
+
+  // 获取openid
+  async getOpenId() {
+    const { ctx } = this;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    // await ctx.validate(rule, requestParam);
+    let res = await ctx.service.user.getOpenId(requestParam);
+    ctx.body = res;
+  }
+
+  // 检查数据
   async checkUser() {
     const { ctx } = this;
     let token = ctx.header.token;

@@ -286,16 +286,26 @@ class UserService extends Service {
     return result
   }
 
-  // 检查用户信息
-  async checkUser(requestParam,token) {
+  async getOpenId(requestParam) {
     const { ctx } = this;
     let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx958c20c1ad9a2fb4&secret=4a9729d70612bafd0a6bd3e44d83cb0e&js_code=${requestParam.code}&grant_type=authorization_code`);
     console.log(authData);
-    const resData = await ctx.model.User.findOne({ openid: authData.openid });
+    return  {
+        success: false,
+        message: "",
+        code: 0,
+        data: authData
+      };
+  }
+
+  // 检查用户信息
+  async checkUser(requestParam,token) {
+    const { ctx } = this;
+    const resData = await ctx.model.User.findOne({ openid: requestParam.openid });
     if (!!resData) {
       // 用户存在
       return  {
-        success: false,
+        success: true,
         message: "用户已存在",
         code: 0,
         data: resData
@@ -303,7 +313,7 @@ class UserService extends Service {
     }
     let reqData = {
       userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
-      openid: authData.openid,
+      openid: requestParam.openid,
       nickName: requestParam.nickName,
       avatarUrl: requestParam.avatarUrl,
       gender: requestParam.gender,
