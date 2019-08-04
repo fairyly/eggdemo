@@ -48,7 +48,32 @@ module.exports = app => {
     },
     updateDate: {         // 更新时间
       type: String
+    },
+    openid: {         // openid
+      type: String
+    },
+    avatarUrl: {         // 头像
+      type: String
+    },
+    nickName: {         // 昵称
+      type: String
+    },
+    gender: {         // 性别
+      type: String
+    },
+    country: {
+      type: String
+    },
+    province: {
+      type: String
+    },
+    city: {
+      type: String
+    },
+    point: {
+      type: String
     }
+
   });
   return mongoose.model('User', UserSchema);
 };

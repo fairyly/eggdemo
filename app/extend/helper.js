@@ -6,7 +6,7 @@
 
 exports.createToken = async (ctx, data) => {
   return ctx.app.jwt.sign(data, ctx.app.config.jwt.secret, {
-    expiresIn: "2h"
+    expiresIn: "200h"
   });
 }
 

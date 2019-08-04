@@ -81,6 +81,20 @@ class UserController extends Controller {
     let res = await ctx.service.user.updateUser(requestParam, token);
     ctx.body = res;
   }
+  // 更新数据
+  async checkUser() {
+    const { ctx } = this;
+    let token = ctx.header.token;
+    // const rule = {
+    //   userName: { type: 'string', required: false, message: '必填项' },
+    //   userPass: { type: 'string', required: false, message: '必填项' },
+    //   userEmail: { type: 'email', required: false, message: '必填项' },
+    // };
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    // await ctx.validate(rule, requestParam);
+    let res = await ctx.service.user.checkUser(requestParam, token);
+    ctx.body = res;
+  }
 }
 
 module.exports = UserController;

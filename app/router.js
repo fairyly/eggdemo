@@ -13,6 +13,7 @@ module.exports = app => {
   router.get('/user/updateUser', controller.user.updateUser);
   router.get('/user/signUp', controller.user.signUp);
   router.get('/user/login', controller.user.login);
+  router.get('/user/checkUser', controller.user.checkUser);
 
   router.post('/', controller.home.index);
   router.post('/user/add', controller.user.add);
@@ -22,6 +23,7 @@ module.exports = app => {
   router.post('/user/updateUser', controller.user.updateUser);
   router.post('/user/signUp', controller.user.signUp);
   router.post('/user/login', controller.user.login);
+  router.post('/user/checkUser', controller.user.checkUser);
 
   router.post('/upload', controller.upload.index);
 };

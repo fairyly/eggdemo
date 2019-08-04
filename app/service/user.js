@@ -285,5 +285,61 @@ class UserService extends Service {
     })
     return result
   }
+
+  // 检查用户信息
+  async checkUser(requestParam,token) {
+    const { ctx } = this;
+    let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx958c20c1ad9a2fb4&secret=4a9729d70612bafd0a6bd3e44d83cb0e&js_code=${requestParam.code}&grant_type=authorization_code`);
+    console.log(authData);
+    const resData = await ctx.model.User.findOne({ openid: authData.openid });
+    if (!!resData) {
+      // 用户存在
+      return  {
+        success: false,
+        message: "用户已存在",
+        code: 0,
+        data: resData
+      };
+    }
+    let reqData = {
+      userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
+      openid: authData.openid,
+      nickName: requestParam.nickName,
+      avatarUrl: requestParam.avatarUrl,
+      gender: requestParam.gender,
+      point: requestParam.point,
+      country: requestParam.country,
+      province: requestParam.province,
+      city: requestParam.city,
+      userName: requestParam.nickName,
+      userEmail: requestParam.userEmail || '',
+      userPass: requestParam.userPass || '',
+      userAge: requestParam.userAge || '',
+      userSex: requestParam.userSex || '0', //0 :男； 1：女
+      userPhoto: requestParam.userPhoto || '',
+      userAddress: requestParam.userAddress || '',
+      userRole: '3', // 1: 管理员，2： 人事，3： 员工 
+      hiredate: requestParam.hiredate || '',
+      job: requestParam.job || '',
+      createDate: await ctx.helper.formatDate(new Date()),
+      updateDate: await ctx.helper.formatDate(new Date())
+    }
+    const result = await ctx.model.User.create(reqData).then(res =>{
+      return {
+        success: true,
+        message: "",
+        code: 1,
+        data: res
+      };
+    }).catch(err =>{
+      return {
+        success: false,
+        message: "查询失败",
+        code: 0,
+        data: err
+      };
+    })
+    return result;
+  }
 }
 module.exports = UserService;
