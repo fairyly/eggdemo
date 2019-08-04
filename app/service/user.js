@@ -294,7 +294,7 @@ class UserService extends Service {
           success: true,
           message: "",
           code: 0,
-          data: res
+          data: new Buffer(res.data).toString()
         };
      })
     return authData;
