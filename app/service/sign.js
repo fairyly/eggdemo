@@ -7,17 +7,41 @@ class UserService extends Service {
   
 
   // 查询单个信息
-  async findUser(requestParam, token) {
+  async findSign(requestParam, token) {
     const { ctx } = this;
-    const result = await ctx.model.User.findOne({'userId': requestParam.openId})
+    let date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    if (m < 10 ) {
+      m = '0' + m;
+    }
+    let d = date.getDate();
+    if (d < 10 ) {
+      d = '0' + d;
+    }
+    const dateVal = `${y}-${d}-${d}`;
+    const result = await ctx.model.User.findOne({'openid': requestParam.openId})
     .then(res =>{
-      res.userPass = '';
-      return {
-        success: true,
-        message: "查询成功",
-        code: 1,
-        data: new Buffer(res.data).toString()
-      };
+      if (res && res.data.createDate.include(dateVal)) {
+        return {
+          success: true,
+          message: "已签到",
+          code: 0,
+          data: {
+            hasSign: true
+          }
+        };
+      }else{
+        return {
+          success: true,
+          message: "未签到",
+          code: 0,
+          data: {
+            hasSign: false
+          }
+        };
+      }
+      
     }).catch(err =>{
       return {
         success: false,
@@ -32,16 +56,27 @@ class UserService extends Service {
  
 
   // 检查签到信息
-  async checkUser(requestParam,token) {
+  async add(requestParam,token) {
     const { ctx } = this;
+    let date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    if (m < 10 ) {
+      m = '0' + m;
+    }
+    let d = date.getDate();
+    if (d < 10 ) {
+      d = '0' + d;
+    }
+    const dateVal = `${y}-${d}-${d}`;
     const resData = await ctx.model.Sign.findOne({ openid: requestParam.openid });
-    if (!!resData && resData.createDate) {
+    if (!!resData && resData.createDate.includes(dateVal)) {
       // 用户存在
       return  {
         success: false,
         message: "用户已签到",
         code: 0,
-        data: resData
+        data: {}
       };
     }
     let reqData = {
@@ -51,7 +86,14 @@ class UserService extends Service {
       point: resData.point + 5,
       createDate: await ctx.helper.formatDate(new Date())
     }
-    const result = await ctx.model.User.create(reqData).then(res =>{
+    await ctx.model.User.updateOne({
+        "openid": requestParam.openid
+    },{
+      point: requestParam.point,
+      updateDate: await ctx.helper.formatDate(new Date())
+    })
+    
+    const result = await ctx.model.Sign.create(reqData).then(res =>{
       return {
         success: true,
         message: "",

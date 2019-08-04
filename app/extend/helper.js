@@ -82,3 +82,29 @@ exports.formatDate = (date) => {
 
   return `${y}-${m}-${d} ${h}:${min}:${s}`;
 }
+
+exports.formatYmd = (date) => {
+  let y = date.getFullYear();
+  let m = date.getMonth() + 1;
+  if (m < 10 ) {
+    m = '0' + m;
+  }
+  let d = date.getDate();
+  if (d < 10 ) {
+    d = '0' + d;
+  }
+  let h = date.getHours();
+  if (h < 10 ) {
+    h = '0' + h;
+  }
+  let min = date.getMinutes();
+  if (min < 10 ) {
+    min = '0' + min;
+  }
+  let s = date.getSeconds();
+  if (s < 10 ) {
+    s = '0' + s;
+  }
+
+  return `${y}-${m}-${d}`;
+}

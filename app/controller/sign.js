@@ -11,7 +11,7 @@ class SignController extends Controller {
     const { ctx } = this;
     const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
     let token = ctx.header.token;
-    ctx.body = await ctx.service.user.add(requestParam, token);
+    ctx.body = await ctx.service.sign.add(requestParam, token);
   }
   
   // 查询单个
@@ -19,7 +19,7 @@ class SignController extends Controller {
     const { ctx } = this;
     let token = ctx.header.token;
     const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
-    let res = await ctx.service.user.findSign(requestParam, token);
+    let res = await ctx.service.sign.findSign(requestParam, token);
     ctx.body = res;
   }
   

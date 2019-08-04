@@ -180,18 +180,8 @@ class UserService extends Service {
   // 查询单个信息
   async findUser(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.helper.verifyToken(ctx, token);
-    if (!resToken.verify) {
-      return {
-        success: false,
-        message: "token 已过期",
-        code: 0,
-        data: {}
-      }
-    }
-    const result = await ctx.model.User.findOne({'userId': requestParam.userId})
+    const result = await ctx.model.User.findOne({'userId': requestParam.openid})
     .then(res =>{
-      res.userPass = '';
       return {
         success: true,
         message: "查询成功",
@@ -244,28 +234,11 @@ class UserService extends Service {
   // 更新
   async updateUser(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.helper.verifyToken(ctx, token);
-    if (!resToken.verify) {
-      return {
-        success: false,
-        message: "token 已过期",
-        code: 0,
-        data: {}
-      }
-    }
+    
     const result = await ctx.model.User.updateOne({
-        "userId": requestParam.userId
+        "openid": requestParam.openid
     },{
-      userName: requestParam.userName,
-      userEmail: requestParam.userEmail,
-      userPass: requestParam.userPass,
-      userAge: requestParam.userAge || '',
-      userSex: requestParam.userSex || '0', //0 :男； 1：女
-      userPhoto: requestParam.userPhoto || '',
-      userAddress: requestParam.userAddress || '',
-      userRole: requestParam.userRole || '3', // 1: 管理员，2： 人事，3： 员工 
-      hiredate: requestParam.hiredate || '',
-      job: requestParam.job || '',
+      point: requestParam.point,
       updateDate: await ctx.helper.formatDate(new Date())
     })
     .then(res =>{
@@ -336,7 +309,7 @@ class UserService extends Service {
       createDate: await ctx.helper.formatDate(new Date()),
       updateDate: await ctx.helper.formatDate(new Date())
     }
-    
+
     const result = await ctx.model.User.create(reqData).then(res =>{
       return {
         success: true,

@@ -16,6 +16,8 @@ module.exports = app => {
   router.get('/user/getOpenId', controller.user.getOpenId);
   router.get('/user/checkUser', controller.user.checkUser);
 
+  router.get('/sign/add', controller.sign.add);
+
   router.post('/', controller.home.index);
   router.post('/user/add', controller.user.add);
   router.post('/user/findAll', controller.user.findAll);
@@ -28,4 +30,6 @@ module.exports = app => {
   router.post('/user/checkUser', controller.user.checkUser);
 
   router.post('/upload', controller.upload.index);
+
+  router.post('/sign/add', controller.sign.add);
 };
