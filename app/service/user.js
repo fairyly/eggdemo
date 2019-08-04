@@ -288,10 +288,10 @@ class UserService extends Service {
 
   async getOpenId(requestParam) {
     const { ctx } = this;
-    let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx958c20c1ad9a2fb4&secret=4a9729d70612bafd0a6bd3e44d83cb0e&js_code=${requestParam.code}&grant_type=authorization_code`);
+    let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx9a31344272cb44c9&secret=d2db5e4678016f4da636ad240f9444b9&js_code=${requestParam.code}&grant_type=authorization_code`);
     console.log(authData);
     return  {
-        success: false,
+        success: true,
         message: "",
         code: 0,
         data: authData
@@ -312,7 +312,7 @@ class UserService extends Service {
       };
     }
     let reqData = {
-      userId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
+      userId: requestParam.openid,//uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
       openid: requestParam.openid,
       nickName: requestParam.nickName,
       avatarUrl: requestParam.avatarUrl,
