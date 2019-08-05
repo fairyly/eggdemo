@@ -71,7 +71,7 @@ class UserService extends Service {
     const dateVal = `${y}-${m}-${d}`;
     const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $in: dateVal} });
     ctx.coreLogger.info('数据：', resData);
-    if (!!resData && resData.createDate.includes(dateVal)) {
+    if (!!resData.length) {
       // 用户存在
       return  {
         signFlag: true
