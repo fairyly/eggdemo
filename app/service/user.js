@@ -277,13 +277,17 @@ class UserService extends Service {
   async checkUser(requestParam,token) {
     const { ctx } = this;
     const resData = await ctx.model.User.findOne({ openid: requestParam.openid });
+    ctx.coreLogger.info('检查用户数据：', resData);
     if (!!resData) {
       // 用户存在
+      const hasSign = await ctx.model.Sign.checkSign(requestParam,token);
+      ctx.coreLogger.info('hasSign数据：', hasSign);
       return  {
         success: true,
         message: "用户已存在",
         code: 0,
-        data: resData
+        data: resData,
+        hasSign: hasSign
       };
     }
     let reqData = {

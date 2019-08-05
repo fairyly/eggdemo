@@ -53,9 +53,37 @@ class UserService extends Service {
     return result;
   }
 
- 
+  /**
+   * 检查当前用户是否签到
+   */
+  async checkSign(requestParam,token) {
+    const { ctx } = this;
+    let date = new Date();
+    let y = date.getFullYear();
+    let m = date.getMonth() + 1;
+    if (m < 10 ) {
+      m = '0' + m;
+    }
+    let d = date.getDate();
+    if (d < 10 ) {
+      d = '0' + d;
+    }
+    const dateVal = `${y}-${d}-${d}`;
+    const resData = await ctx.model.Sign.findOne({ openid: requestParam.openid });
+    ctx.coreLogger.info('数据：', resData);
+    if (!!resData && resData.createDate.includes(dateVal)) {
+      // 用户存在
+      return  {
+        signFlag: true
+      };
+    }else {
+      return  {
+        signFlag: false
+      };
+    }
+   } 
 
-  // 检查签到信息
+  // 签到
   async add(requestParam,token) {
     const { ctx } = this;
     let date = new Date();
