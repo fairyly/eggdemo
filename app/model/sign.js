@@ -6,8 +6,7 @@ module.exports = app => {
 
   const SignSchema = new Schema({
     userId: {           // 用户 id
-      type: String,
-      unique: true
+      type: String
     },
     nickName: {           // 用户 id
       type: String
