@@ -68,7 +68,7 @@ class UserService extends Service {
     if (d < 10 ) {
       d = '0' + d;
     }
-    const dateVal = `${y}-${d}-${d}`;
+    const dateVal = `${y}-${m}-${d}`;
     const resData = await ctx.model.Sign.findOne({ openid: requestParam.openid });
     ctx.coreLogger.info('数据：', resData);
     if (!!resData && resData.createDate.includes(dateVal)) {
