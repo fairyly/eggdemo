@@ -280,8 +280,25 @@ class UserService extends Service {
     ctx.coreLogger.info('检查用户数据：', resData);
     if (!!resData) {
       // 用户存在
-      const hasSign = await ctx.model.Sign.checkSign(requestParam,token);
-      ctx.coreLogger.info('hasSign数据：', hasSign);
+      let date = new Date();
+      let y = date.getFullYear();
+      let m = date.getMonth() + 1;
+      if (m < 10 ) {
+        m = '0' + m;
+      }
+      let d = date.getDate();
+      if (d < 10 ) {
+        d = '0' + d;
+      }
+      let hasSign = false;
+      const dateVal = `${y}-${d}-${d}`;
+      const hasSignData = await ctx.model.Sign.findOne({ openid: requestParam.openid });
+      ctx.coreLogger.info('数据：', hasSignData);
+      if (!!hasSignData && hasSignData.createDate.includes(dateVal)) {
+        hasSign = true;
+      }
+      ctx.coreLogger.info('hasSign数据：', hasSignData);
+
       return  {
         success: true,
         message: "用户已存在",
