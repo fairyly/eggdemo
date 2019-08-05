@@ -123,6 +123,7 @@ class UserService extends Service {
     })
     
     const result = await ctx.model.Sign.create(reqData).then(res =>{
+      console.log('signadd')
       return {
         success: true,
         message: "",

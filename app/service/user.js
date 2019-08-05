@@ -292,7 +292,7 @@ class UserService extends Service {
       }
       let hasSign = false;
       let dateVal = `${y}-${m}-${d}`;
-      const hasSignData = await ctx.model.Sign.find({ openid: requestParam.openid});
+      const hasSignData = await ctx.model.Sign.find({ openid: requestParam.openid,createDate:{ $in: dateVal} });
       console.log(hasSignData)
       ctx.coreLogger.info('数据：', hasSignData);
       if (!!hasSignData.length) {
