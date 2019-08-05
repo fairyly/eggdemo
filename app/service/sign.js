@@ -96,15 +96,16 @@ class UserService extends Service {
     if (d < 10 ) {
       d = '0' + d;
     }
-    const dateVal = `${y}-${d}-${d}`;
-    const resData = await ctx.model.Sign.findOne({ openid: requestParam.openid });
-    if (!!resData && resData.createDate.includes(dateVal)) {
+    const dateVal = `${y}-${m}-${d}`;
+    const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $in: dateVal} });
+    if (!!resData.length) {
       // 用户存在
       return  {
         success: false,
         message: "用户已签到",
         code: 0,
-        data: {}
+        data: {},
+        hasSign: true
       };
     }
     let reqData = {
