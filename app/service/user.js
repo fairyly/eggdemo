@@ -87,15 +87,7 @@ class UserService extends Service {
   // 添加用户信息
   async add(requestParam,token) {
     const { ctx } = this;
-    let resToken = await ctx.helper.verifyToken(ctx, token);
-    if (!resToken.verify) {
-      return {
-        success: false,
-        message: "token 已过期",
-        code: 0,
-        data: {}
-      }
-    }
+    
     const resData = await ctx.model.User.findOne({ userName: requestParam.userName });
     if (!!resData) {
       return  {
@@ -141,15 +133,6 @@ class UserService extends Service {
   // 查询所有信息
   async findAll(requestParam, token) {
     const { ctx } = this;
-    let resToken = await ctx.helper.verifyToken(ctx, token);
-    if (!resToken.verify) {
-      return {
-        success: false,
-        message: "token 已过期",
-        code: 0,
-        data: {}
-      }
-    }
     let total = await ctx.model.User.find();
     let currentPage = requestParam.currentPage;
     let pageSize = requestParam.pageSize;
@@ -202,15 +185,7 @@ class UserService extends Service {
   // 删除一个信息
   async deleteUser(requestParam, token){
     const { ctx } = this;
-    let resToken = await ctx.helper.verifyToken(ctx, token);
-    if (!resToken.verify) {
-      return {
-        success: false,
-        message: "token 已过期",
-        code: 0,
-        data: {}
-      }
-    }
+    
     const result = await ctx.model.User.deleteOne({
         "userId": requestParam.userId
     }).then(res =>{
@@ -292,7 +267,7 @@ class UserService extends Service {
       }
       let hasSign = false;
       let dateVal = `${y}-${m}-${d}`;
-      const hasSignData = await ctx.model.Sign.find({ openid: requestParam.openid,createDate:{$regex: dateVal} });
+      const hasSignData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $regex: dateVal } });
       console.log(hasSignData)
       ctx.coreLogger.info('数据：', hasSignData);
       if (!!hasSignData.length) {

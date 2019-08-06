@@ -17,6 +17,7 @@ module.exports = app => {
   router.get('/user/checkUser', controller.user.checkUser);
 
   router.get('/sign/add', controller.sign.add);
+  router.get('/sign/findSign', controller.sign.findSign);
 
   router.post('/', controller.home.index);
   router.post('/user/add', controller.user.add);
@@ -32,4 +33,5 @@ module.exports = app => {
   router.post('/upload', controller.upload.index);
 
   router.post('/sign/add', controller.sign.add);
+  router.post('/sign/findSign', controller.sign.findSign);
 };

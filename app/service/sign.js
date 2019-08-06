@@ -6,55 +6,30 @@ const uuidv5 = require('uuid/v5');
 class UserService extends Service {
   
 
-  // 查询单个信息
+  // 查询单个用户签到信息
   async findSign(requestParam, token) {
     const { ctx } = this;
-    let date = new Date();
-    let y = date.getFullYear();
-    let m = date.getMonth() + 1;
-    if (m < 10 ) {
-      m = '0' + m;
-    }
-    let d = date.getDate();
-    if (d < 10 ) {
-      d = '0' + d;
-    }
-    const dateVal = `${y}-${d}-${d}`;
-    const result = await ctx.model.User.findOne({'openid': requestParam.openId})
+    const result = await ctx.model.Sign.find({'openid': requestParam.openId})
     .then(res =>{
-      if (res && res.data.createDate.include(dateVal)) {
-        return {
-          success: true,
-          message: "已签到",
-          code: 0,
-          data: {
-            hasSign: true
-          }
-        };
-      }else{
-        return {
-          success: true,
-          message: "未签到",
-          code: 0,
-          data: {
-            hasSign: false
-          }
-        };
-      }
-      
+      return {
+        success: true,
+        message: "查询成功",
+        code: 0,
+        data: res
+      };
     }).catch(err =>{
       return {
         success: false,
         message: "查询失败",
         code: 0,
-        data: {}
+        data: []
       };
     })
     return result;
   }
 
   /**
-   * 检查当前用户是否签到
+   * 检查当前用户当天是否签到
    */
   async checkSign(requestParam,token) {
     const { ctx } = this;
@@ -69,7 +44,7 @@ class UserService extends Service {
       d = '0' + d;
     }
     const dateVal = `${y}-${m}-${d}`;
-    const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $in: dateVal} });
+    const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $regex: dateVal } });
     ctx.coreLogger.info('数据：', resData);
     if (!!resData.length) {
       // 用户存在
@@ -97,7 +72,7 @@ class UserService extends Service {
       d = '0' + d;
     }
     const dateVal = `${y}-${m}-${d}`;
-    const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $in: dateVal} });
+    const resData = await ctx.model.Sign.find({ openid: requestParam.openid, createDate:{ $regex: dateVal } });
     if (!!resData.length) {
       // 用户存在
       return  {
