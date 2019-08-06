@@ -109,6 +109,7 @@ class UserService extends Service {
       };
     }
     let reqData = {
+      signId: uuidv5((new Date().getTime())+'123.com', uuidv5.DNS).replace(/-/g,''),
       userId: requestParam.openid,
       openid: requestParam.openid,
       nickName: requestParam.nickName,

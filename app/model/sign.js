@@ -5,6 +5,11 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const SignSchema = new Schema({
+    signId: {           // 用户 id
+      type: String,
+      unique: true,
+      required: true
+    },
     userId: {           // 用户 id
       type: String
     },

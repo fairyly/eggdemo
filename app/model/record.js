@@ -5,9 +5,13 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const RecordSchema = new Schema({
-    userId: {           // 用户 id
+    recordId: {           // recordId
       type: String,
-      unique: true
+      unique: true,
+      required: true
+    },
+    userId: {           // 用户 id
+      type: String
     },
     openid: {         // openid
       type: String
