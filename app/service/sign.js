@@ -9,6 +9,7 @@ class UserService extends Service {
   // 查询单个用户签到信息
   async findSign(requestParam, token) {
     const { ctx } = this;
+    console.log(requestParam.openId)
     const result = await ctx.model.Sign.find({'openid': requestParam.openId})
     .then(res =>{
       return {
