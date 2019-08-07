@@ -5,25 +5,60 @@ const uuidv5 = require('uuid/v5');
 
 class UserService extends Service {
   
-
-  // 查询单个用户签到信息
-  async findSign(requestParam, token) {
+  // 查询所有信息
+  async findAllSign(requestParam, token) {
     const { ctx } = this;
-    console.log(requestParam.openid)
-    const result = await ctx.model.Sign.find({'openid': requestParam.openid})
+    let total = await ctx.model.Sign.find();
+    let currentPage = requestParam.currentPage;
+    let pageSize = requestParam.pageSize;
+    const querySkip = (currentPage - 1) * Number(pageSize);
+    let result = await ctx.model.Sign.find().limit(pageSize || 10).skip(querySkip)
     .then(res =>{
+      res.forEach( async (ele) => {
+        ele.userPass = '';
+      })
       return {
         success: true,
         message: "查询成功",
-        code: 0,
-        data: res
+        code: 1,
+        data: res,
+        totalNum: total.length
       };
     }).catch(err =>{
       return {
         success: false,
         message: "查询失败",
         code: 0,
-        data: []
+        data: [],
+        totalNum: total.length
+      };
+    })
+    return result;
+  }
+
+  // 查询单个用户签到信息
+  async findSign(requestParam, token) {
+    const { ctx } = this;
+    let total = await ctx.model.Sign.find({'openid': requestParam.openid});
+    let currentPage = requestParam.currentPage;
+    let pageSize = requestParam.pageSize;
+    const querySkip = (currentPage - 1) * Number(pageSize);
+    const result = await ctx.model.Sign.find({'openid': requestParam.openid}).limit(pageSize || 10).skip(querySkip)
+    .then(res =>{
+      return {
+        success: true,
+        message: "查询成功",
+        code: 0,
+        data: res,
+        totalNum: total.length
+      };
+    }).catch(err =>{
+      return {
+        success: false,
+        message: "查询失败",
+        code: 0,
+        data: [],
+        totalNum: total.length
       };
     })
     return result;
