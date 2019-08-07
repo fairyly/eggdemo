@@ -22,6 +22,14 @@ class SignController extends Controller {
     let res = await ctx.service.sign.findSign(requestParam, token);
     ctx.body = res;
   }
+  // 查询所有
+  async findAllSign() {
+    const { ctx } = this;
+    let token = ctx.header.token;
+    const requestParam = !!Object.keys(ctx.request.body).length ? ctx.request.body : ctx.request.query;
+    let res = await ctx.service.sign.findSign(requestParam, token);
+    ctx.body = res;
+  }
   
 }
 
