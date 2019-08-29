@@ -236,7 +236,7 @@ class UserService extends Service {
 
   async getOpenId(requestParam) {
     const { ctx } = this;
-    let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx9a31344272cb44c9&secret=d2db5e4678016f4da636ad240f9444b9&js_code=${requestParam.code}&grant_type=authorization_code`).then(
+    let authData = await this.ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${requestParam.code}&grant_type=authorization_code`).then(
       res=>{
         return  {
           success: true,

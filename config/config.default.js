@@ -57,19 +57,12 @@ module.exports = appInfo => {
     saltRounds: 10 // default 10
   };
 
-  exports.alinode = {
-    server: 'wss://agentserver.node.aliyun.com:8080',
-    appid: '81043',
-    secret: '91cf2f2c8d4be8c6d601b2f2d8090f2bcacfae92',
-    
+  // 小程序
+  config.wxapp = {
+    appid: '你的appid',
+    secret: ''
   };
-  // 日志
-  exports.logger = {
-    level: 'DEBUG',
-    allowDebugAtProd: true,
-    disableConsoleAfterReady: false
-  };
-
+  
   return {
     ...config,
     ...userConfig,
